@@ -1,0 +1,37 @@
+{
+  "name": "feishu-bitable-assistant",
+  "version": "1.0.0",
+  "description": "BitableAI - 飞书多维表格智能助手",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "jest",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [
+    "feishu",
+    "bitable",
+    "automation",
+    "ai",
+    "openclaw",
+    "skill"
+  ],
+  "author": "Allin-super",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.0",
+    "node-fetch": "^3.3.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Allin-super/feishu-bitable-assistant"
+  }
+}
