@@ -4,6 +4,7 @@
  * 文档：https://open.feishu.cn/document/ukTMukTMukTM/uATNz4SO1MjL5UzM
  */
 
+require('dotenv').config();
 const axios = require('axios');
 
 class BitableClient {
@@ -89,40 +90,53 @@ class BitableClient {
       data.folder_token = folderToken;
     }
 
-    return await this.request('POST', '/bitable/v1/apps', data);
+    const result = await this.request('POST', '/bitable/v1/apps', data);
+    // 返回结构是 { app: {...} }
+    const app = result.app || result;
+    // 确保返回正确的结构
+    return {
+      app_token: app.app_token,
+      default_table_id: app.default_table_id,
+      name: app.name,
+      app_url: app.url
+    };
   }
 
   /**
    * 获取表格列表
    */
   async listTables(appToken) {
-    return await this.request('GET', `/bitable/v1/apps/${appToken}/tables`);
+    const result = await this.request('GET', `/bitable/v1/apps/${appToken}/tables`);
+    return result.items || result.tables || result;
   }
 
   /**
    * 创建数据表
    */
   async createTable(appToken, name, fields) {
-    return await this.request('POST', `/bitable/v1/apps/${appToken}/tables`, {
+    const result = await this.request('POST', `/bitable/v1/apps/${appToken}/tables`, {
       name: name,
       fields: fields
     });
+    return result.table || result;
   }
 
   /**
    * 添加字段
    */
   async createField(appToken, tableId, field) {
-    return await this.request('POST', `/bitable/v1/apps/${appToken}/tables/${tableId}/fields`, field);
+    const result = await this.request('POST', `/bitable/v1/apps/${appToken}/tables/${tableId}/fields`, field);
+    return result.field || result;
   }
 
   /**
    * 批量添加记录
    */
   async createRecords(appToken, tableId, records) {
-    return await this.request('POST', `/bitable/v1/apps/${appToken}/tables/${tableId}/records`, {
+    const result = await this.request('POST', `/bitable/v1/apps/${appToken}/tables/${tableId}/records`, {
       records: records
     });
+    return result;
   }
 
   /**
@@ -130,16 +144,18 @@ class BitableClient {
    */
   async listRecords(appToken, tableId, params = {}) {
     const queryParams = new URLSearchParams(params).toString();
-    return await this.request('GET', `/bitable/v1/apps/${appToken}/tables/${tableId}/records?${queryParams}`);
+    const result = await this.request('GET', `/bitable/v1/apps/${appToken}/tables/${tableId}/records?${queryParams}`);
+    return result;
   }
 
   /**
    * 更新记录
    */
   async updateRecord(appToken, tableId, recordId, fields) {
-    return await this.request('PUT', `/bitable/v1/apps/${appToken}/tables/${tableId}/records/${recordId}`, {
+    const result = await this.request('PUT', `/bitable/v1/apps/${appToken}/tables/${tableId}/records/${recordId}`, {
       fields: fields
     });
+    return result;
   }
 
   /**

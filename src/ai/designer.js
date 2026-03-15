@@ -12,13 +12,7 @@ const TEMPLATES = {
     fields: [
       { name: '公司名', type: 'single_line_text', required: true },
       { name: '联系人', type: 'single_line_text' },
-      { name: '电话', type: 'phone' },
-      { name: '邮箱', type: 'email' },
-      { name: '客户状态', type: 'single_select', options: ['潜在客户', '意向客户', '成交客户', '休眠客户'] },
-      { name: '优先级', type: 'single_select', options: ['高', '中', '低'] },
-      { name: '来源', type: 'single_select', options: ['官网', '转介绍', '广告', '活动', '其他'] },
-      { name: '创建时间', type: 'date_time', auto: true },
-      { name: '最后联系', type: 'date_time' },
+      { name: '电话', type: 'single_line_text' },
       { name: '备注', type: 'multi_line_text' }
     ]
   },
@@ -28,15 +22,11 @@ const TEMPLATES = {
     name: '项目管理',
     fields: [
       { name: '项目名称', type: 'single_line_text', required: true },
-      { name: '项目负责人', type: 'user' },
-      { name: '开始日期', type: 'date' },
-      { name: '截止日期', type: 'date' },
-      { name: '进度', type: 'number', format: 'percent' },
-      { name: '状态', type: 'single_select', options: ['未开始', '进行中', '已完成', '已延期'] },
-      { name: '优先级', type: 'single_select', options: ['高', '中', '低'] },
-      { name: '项目描述', type: 'multi_line_text' },
-      { name: '附件', type: 'attachment' },
-      { name: '创建时间', type: 'date_time', auto: true }
+      { name: '项目负责人', type: 'single_line_text' },
+      { name: '开始日期', type: 'single_line_text' },
+      { name: '截止日期', type: 'single_line_text' },
+      { name: '进度', type: 'number' },
+      { name: '项目描述', type: 'multi_line_text' }
     ]
   },
 
@@ -44,17 +34,12 @@ const TEMPLATES = {
   sales: {
     name: '销售管理',
     fields: [
-      { name: '订单编号', type: 'single_line_text', auto: true, prefix: 'SO-' },
+      { name: '订单编号', type: 'single_line_text' },
       { name: '客户名称', type: 'single_line_text', required: true },
       { name: '产品', type: 'single_line_text' },
       { name: '数量', type: 'number' },
-      { name: '单价', type: 'currency' },
-      { name: '总金额', type: 'currency', formula: '数量 * 单价' },
-      { name: '订单状态', type: 'single_select', options: ['待确认', '已确认', '生产中', '已发货', '已完成'] },
-      { name: '付款状态', type: 'single_select', options: ['未付款', '部分付款', '已付款'] },
-      { name: '下单日期', type: 'date' },
-      { name: '预计交付', type: 'date' },
-      { name: '销售备注', type: 'multi_line_text' }
+      { name: '单价', type: 'number' },
+      { name: '备注', type: 'multi_line_text' }
     ]
   },
 
@@ -64,14 +49,11 @@ const TEMPLATES = {
     fields: [
       { name: '商品名称', type: 'single_line_text', required: true },
       { name: 'SKU 编码', type: 'single_line_text' },
-      { name: '分类', type: 'single_select' },
+      { name: '分类', type: 'single_line_text' },
       { name: '规格', type: 'single_line_text' },
       { name: '库存数量', type: 'number' },
-      { name: '预警数量', type: 'number' },
-      { name: '单价', type: 'currency' },
-      { name: '总金额', type: 'currency', formula: '库存数量 * 单价' },
+      { name: '单价', type: 'number' },
       { name: '供应商', type: 'single_line_text' },
-      { name: '入库日期', type: 'date' },
       { name: '备注', type: 'multi_line_text' }
     ]
   },
@@ -81,14 +63,11 @@ const TEMPLATES = {
     name: '员工管理',
     fields: [
       { name: '姓名', type: 'single_line_text', required: true },
-      { name: '工号', type: 'single_line_text', auto: true, prefix: 'E-' },
-      { name: '部门', type: 'single_select' },
+      { name: '工号', type: 'single_line_text' },
+      { name: '部门', type: 'single_line_text' },
       { name: '职位', type: 'single_line_text' },
-      { name: '入职日期', type: 'date' },
-      { name: '手机号', type: 'phone' },
-      { name: '邮箱', type: 'email' },
-      { name: '直属上级', type: 'user' },
-      { name: '员工状态', type: 'single_select', options: ['试用期', '正式', '离职'] },
+      { name: '入职日期', type: 'single_line_text' },
+      { name: '手机号', type: 'single_line_text' },
       { name: '备注', type: 'multi_line_text' }
     ]
   },
@@ -98,14 +77,9 @@ const TEMPLATES = {
     name: '财务管理',
     fields: [
       { name: '账单名称', type: 'single_line_text', required: true },
-      { name: '类型', type: 'single_select', options: ['收入', '支出'] },
-      { name: '金额', type: 'currency', required: true },
-      { name: '日期', type: 'date' },
-      { name: '分类', type: 'single_select' },
-      { name: '经手人', type: 'user' },
-      { name: '支付方式', type: 'single_select', options: ['现金', '银行卡', '支付宝', '微信', '其他'] },
-      { name: '状态', type: 'single_select', options: ['待审核', '已通过', '已拒绝'] },
-      { name: '凭证', type: 'attachment' },
+      { name: '金额', type: 'number', required: true },
+      { name: '日期', type: 'single_line_text' },
+      { name: '分类', type: 'single_line_text' },
       { name: '备注', type: 'multi_line_text' }
     ]
   },
@@ -115,15 +89,10 @@ const TEMPLATES = {
     name: '任务管理',
     fields: [
       { name: '任务名称', type: 'single_line_text', required: true },
-      { name: '负责人', type: 'user' },
-      { name: '优先级', type: 'single_select', options: ['紧急重要', '重要不紧急', '紧急不重要', '不紧急不重要'] },
-      { name: '状态', type: 'single_select', options: ['待办', '进行中', '已完成', '已取消'] },
-      { name: '开始日期', type: 'date' },
-      { name: '截止日期', type: 'date' },
-      { name: '预计工时', type: 'number', unit: '小时' },
-      { name: '实际工时', type: 'number', unit: '小时' },
-      { name: '任务描述', type: 'multi_line_text' },
-      { name: '创建时间', type: 'date_time', auto: true }
+      { name: '负责人', type: 'single_line_text' },
+      { name: '开始日期', type: 'single_line_text' },
+      { name: '截止日期', type: 'single_line_text' },
+      { name: '任务描述', type: 'multi_line_text' }
     ]
   },
 
@@ -132,14 +101,11 @@ const TEMPLATES = {
     name: '会议管理',
     fields: [
       { name: '会议主题', type: 'single_line_text', required: true },
-      { name: '会议时间', type: 'date_time' },
+      { name: '会议时间', type: 'single_line_text' },
       { name: '会议地点', type: 'single_line_text' },
-      { name: '主持人', type: 'user' },
-      { name: '参会人员', type: 'user', multiple: true },
-      { name: '会议类型', type: 'single_select', options: ['周会', '月会', '项目会', '培训会', '其他'] },
+      { name: '主持人', type: 'single_line_text' },
       { name: '会议纪要', type: 'multi_line_text' },
-      { name: '待办事项', type: 'multi_line_text' },
-      { name: '附件', type: 'attachment' }
+      { name: '待办事项', type: 'multi_line_text' }
     ]
   }
 };
@@ -184,40 +150,38 @@ function recommendTemplate(description) {
 
 /**
  * 将字段定义转换为飞书 API 格式
+ * 飞书 API v2 字段类型：https://open.feishu.cn/document/ukTMukTMukTM/uATNz4SO1MjL5UzM
  */
 function convertToFeishuFields(fields) {
+  // 飞书 API v2 支持的字段类型
   const typeMapping = {
-    'single_line_text': 'text',
-    'multi_line_text': 'text',
-    'phone': 'phone',
-    'email': 'email',
-    'single_select': 'single_select',
-    'multi_select': 'multi_select',
-    'number': 'number',
-    'currency': 'number',
-    'percent': 'number',
-    'date': 'date',
-    'date_time': 'date_time',
-    'user': 'user',
-    'attachment': 'attachment',
-    'link': 'url',
-    'checkbox': 'checkbox',
-    'formula': 'formula',
-    'lookup': 'lookup',
-    'rollup': 'rollup'
+    'single_line_text': 1,      // 文本
+    'multi_line_text': 2,       // 多行文本
+    'phone': 11,                // 电话
+    'email': 12,                // 邮箱
+    'single_select': 3,         // 单选
+    'multi_select': 4,          // 多选
+    'number': 5,                // 数字
+    'currency': 5,              // 货币 (用数字类型)
+    'percent': 5,               // 百分比 (用数字类型)
+    'date': 6,                  // 日期
+    'date_time': 7,             // 日期时间
+    'user': 8,                  // 成员
+    'attachment': 9,            // 附件
+    'link': 10,                 // 链接
+    'checkbox': 13,             // 复选框
   };
 
   return fields.map(field => {
     const feishuField = {
       field_name: field.name,
-      type: typeMapping[field.type] || 'text'
+      type: typeMapping[field.type] || 1  // 默认文本
     };
 
     // 添加选项 (单选/多选)
     if (field.options) {
       feishuField.property = {
         single_select_config: {
-          options: field.options.map(opt => ({ name: opt, color: 'blue' }))
         }
       };
     }

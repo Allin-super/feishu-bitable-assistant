@@ -30,15 +30,29 @@ class BitableAI {
     const app = await this.client.createApp(appName);
     console.log('✅ 应用创建成功:', app.app_url);
 
-    // 创建数据表
-    console.log('正在创建数据表...');
-    const table = await this.client.createTable(app.app_token, appName, fields);
-    console.log('✅ 数据表创建成功');
+    // 飞书多维表格创建应用时会自动创建第一个表
+    // 不需要手动创建表，直接获取表列表
+    console.log('正在获取表格信息...');
+    const tables = await this.client.listTables(app.app_token);
+    const tableId = tables[0]?.id || tables.items?.[0]?.id || app.default_table_id;
+    
+    console.log('✅ 表格获取成功，ID:', tableId);
+
+    // 添加字段到表格
+    console.log('正在添加字段...');
+    for (const field of fields) {
+      try {
+        await this.client.createField(app.app_token, tableId, field);
+      } catch (error) {
+        console.warn(`字段 ${field.field_name} 添加失败:`, error.message);
+      }
+    }
+    console.log('✅ 字段添加完成');
 
     return {
       app_token: app.app_token,
       app_url: app.app_url,
-      table_id: table.id,
+      table_id: tableId,
       template: templateName
     };
   }
